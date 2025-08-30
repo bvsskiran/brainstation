@@ -1,7 +1,7 @@
 # Docs for the Azure Web Apps Deploy action: https://github.com/Azure/webapps-deploy
 # More GitHub Actions for Azure: https://github.com/Azure/actions
 
-name: Build and deploy Node.js app to Azure Web App - brainstation
+name: Build and deploy Next.js app to Azure Web App - brainstation
 
 on:
   push:
@@ -23,12 +23,15 @@ jobs:
         with:
           node-version: '22.x'
 
-      - name: npm install, build, and test
-        run: |
-          npm install
-          npm run build --if-present
-          npm run test --if-present
+      - name: Install Dependencies
+        run: npm install
 
+      - name: Build Next.js App
+        run: npm run build
+
+      - name: Test Next.js App
+        run: npm run test
+        
       - name: Upload artifact for deployment job
         uses: actions/upload-artifact@v4
         with:
@@ -62,4 +65,5 @@ jobs:
           app-name: 'brainstation'
           slot-name: 'Production'
           package: .
+
           
